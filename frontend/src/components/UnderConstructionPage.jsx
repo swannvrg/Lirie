@@ -3,16 +3,91 @@ import { Mail, Phone, Clock, Wrench, HardHat, Construction } from 'lucide-react'
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 
-const UnderConstructionPage = () => {
-  const [progress, setProgress] = useState(0);
+// SVG Logo Component
+const LirieLogo = ({ className }) => (
+  <div className={`${className} relative`}>
+    <svg width="300" height="300" viewBox="0 0 300 300" className="w-full h-full">
+      <defs>
+        <pattern id="geometricPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M0,20 Q10,0 20,20 Q30,40 40,20" stroke="#8B5A4B" strokeWidth="1" fill="none" />
+          <path d="M20,0 Q30,20 20,40 Q10,20 20,0" stroke="#8B5A4B" strokeWidth="1" fill="none" />
+        </pattern>
+      </defs>
+      
+      {/* Background with pattern */}
+      <rect width="300" height="300" rx="20" fill="#B86A5B" />
+      <rect width="300" height="240" rx="20" fill="url(#geometricPattern)" opacity="0.3" />
+      
+      {/* LIRIE Text */}
+      <text x="150" y="140" textAnchor="middle" fontSize="64" fontWeight="bold" fill="white" fontFamily="Inter, sans-serif">
+        LIRIE
+      </text>
+      
+      {/* Subtitle */}
+      <text x="150" y="270" textAnchor="middle" fontSize="16" fill="#052633" fontFamily="Inter, sans-serif">
+        Ingénierie de la construction
+      </text>
+    </svg>
+  </div>
+);
 
+// Crane Animation Component
+const CraneAnimation = () => {
+  const [craneHeight, setCraneHeight] = useState(0);
+  
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress((prev) => (prev >= 85 ? 0 : prev + 1));
+      setCraneHeight(prev => prev >= 100 ? 0 : prev + 2);
     }, 100);
     return () => clearInterval(interval);
   }, []);
 
+  return (
+    <div className="relative w-full max-w-2xl mx-auto h-32 mb-12">
+      {/* Construction Site Base */}
+      <div className="absolute bottom-0 w-full h-4 rounded" style={{ background: '#052633' }}></div>
+      
+      {/* Crane Structure */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+        {/* Crane Tower */}
+        <div className="w-3 bg-yellow-600 relative" style={{ height: '80px' }}>
+          {/* Crane Arm */}
+          <div className="absolute top-2 -left-16 w-32 h-2 bg-yellow-600 crane-arm-animation"></div>
+          
+          {/* Crane Hook */}
+          <div 
+            className="absolute top-4 w-1 bg-gray-800 transition-all duration-1000"
+            style={{ left: '60px', height: `${craneHeight}px` }}
+          >
+            <div className="w-3 h-3 bg-yellow-600 rounded-full -ml-1 relative">
+              {/* Building Block */}
+              <div className="absolute top-3 -left-1 w-4 h-4 bg-orange-500 rounded animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Building being constructed */}
+      <div className="absolute bottom-4 right-1/4">
+        <div className="space-y-1">
+          <div className="w-16 h-4 bg-gray-400 animate-building-grow" style={{ animationDelay: '0s' }}></div>
+          <div className="w-16 h-4 bg-gray-500 animate-building-grow" style={{ animationDelay: '1s' }}></div>
+          <div className="w-16 h-4 bg-gray-400 animate-building-grow" style={{ animationDelay: '2s' }}></div>
+          <div className="w-16 h-4 bg-gray-500 animate-building-grow" style={{ animationDelay: '3s' }}></div>
+        </div>
+      </div>
+      
+      {/* Construction Workers (dots) */}
+      <div className="absolute bottom-4 left-1/4 space-x-2 flex">
+        <div className="w-2 h-6 bg-orange-400 rounded-full worker-animation" style={{ animationDelay: '0s' }}></div>
+        <div className="w-2 h-6 bg-blue-400 rounded-full worker-animation" style={{ animationDelay: '1s' }}></div>
+        <div className="w-2 h-6 bg-green-400 rounded-full worker-animation" style={{ animationDelay: '2s' }}></div>
+      </div>
+    </div>
+  );
+};
+
+const UnderConstructionPage = () => {
   return (
     <div className="min-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #D9D9D9 0%, #F5F5F5 100%)' }}>
       {/* Animated Background Elements */}
@@ -39,20 +114,8 @@ const UnderConstructionPage = () => {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
         {/* Logo Section */}
         <div className="mb-16 float-animation">
-          <div className="w-64 h-64 mx-auto mb-6 relative">
-            <img 
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==" 
-              alt="LIRIE Logo" 
-              className="w-full h-full object-contain rounded-xl shadow-2xl pulse-glow"
-              style={{ background: '#B86A5B', padding: '20px' }}
-            />
-            {/* Placeholder for actual logo */}
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-400 to-red-500 rounded-xl shadow-2xl">
-              <div className="text-white text-center">
-                <div className="text-4xl font-bold mb-2 tracking-wider">LIRIE</div>
-                <div className="text-sm opacity-90">Ingénierie de la construction</div>
-              </div>
-            </div>
+          <div className="w-72 h-72 mx-auto mb-6">
+            <LirieLogo className="pulse-glow" />
           </div>
         </div>
 
@@ -69,23 +132,8 @@ const UnderConstructionPage = () => {
           </p>
         </div>
 
-        {/* Progress Bar */}
-        <div className="w-full max-w-2xl mb-12">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-semibold" style={{ color: '#052633' }}>Progression</span>
-            <span className="text-sm font-semibold" style={{ color: '#B86A5B' }}>{progress}%</span>
-          </div>
-          <div className="w-full bg-white/30 rounded-full h-4 shadow-inner">
-            <div 
-              className="h-4 rounded-full transition-all duration-300 shadow-lg"
-              style={{ 
-                width: `${progress}%`, 
-                background: `linear-gradient(90deg, #B86A5B 0%, #D4846F 100%)`,
-                boxShadow: '0 2px 10px rgba(184, 106, 91, 0.4)'
-              }}
-            />
-          </div>
-        </div>
+        {/* Crane Animation replacing Progress Bar */}
+        <CraneAnimation />
 
         {/* Contact Information */}
         <Card className="w-full max-w-md mx-auto shadow-2xl border-0" style={{ background: 'rgba(255, 255, 255, 0.9)' }}>
