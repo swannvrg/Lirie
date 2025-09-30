@@ -1,198 +1,184 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, Clock, Wrench, HardHat, Construction } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent } from './ui/card';
+import { Mail, Phone } from 'lucide-react';
 
-// SVG Logo Component
-const LirieLogo = ({ className }) => (
+// SVG Logo Component - Smaller version for header
+const LirieLogoSmall = ({ className }) => (
   <div className={`${className} relative`}>
-    <svg width="300" height="300" viewBox="0 0 300 300" className="w-full h-full">
+    <svg width="120" height="120" viewBox="0 0 120 120" className="w-full h-full">
       <defs>
-        <pattern id="geometricPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M0,20 Q10,0 20,20 Q30,40 40,20" stroke="#8B5A4B" strokeWidth="1" fill="none" />
-          <path d="M20,0 Q30,20 20,40 Q10,20 20,0" stroke="#8B5A4B" strokeWidth="1" fill="none" />
+        <pattern id="geometricPatternSmall" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+          <path d="M0,8 Q4,0 8,8 Q12,16 16,8" stroke="#8B5A4B" strokeWidth="0.5" fill="none" />
+          <path d="M8,0 Q12,8 8,16 Q4,8 8,0" stroke="#8B5A4B" strokeWidth="0.5" fill="none" />
         </pattern>
       </defs>
       
       {/* Background with pattern */}
-      <rect width="300" height="300" rx="20" fill="#B86A5B" />
-      <rect width="300" height="240" rx="20" fill="url(#geometricPattern)" opacity="0.3" />
+      <rect width="120" height="120" rx="8" fill="#B86A5B" />
+      <rect width="120" height="96" rx="8" fill="url(#geometricPatternSmall)" opacity="0.2" />
       
       {/* LIRIE Text */}
-      <text x="150" y="140" textAnchor="middle" fontSize="64" fontWeight="bold" fill="white" fontFamily="Inter, sans-serif">
+      <text x="60" y="56" textAnchor="middle" fontSize="24" fontWeight="bold" fill="white" fontFamily="Inter, sans-serif">
         LIRIE
       </text>
       
       {/* Subtitle */}
-      <text x="150" y="270" textAnchor="middle" fontSize="16" fill="#052633" fontFamily="Inter, sans-serif">
+      <text x="60" y="108" textAnchor="middle" fontSize="6" fill="#052633" fontFamily="Inter, sans-serif">
         Ingénierie de la construction
       </text>
     </svg>
   </div>
 );
 
-// Crane Animation Component
-const CraneAnimation = () => {
-  const [craneHeight, setCraneHeight] = useState(0);
-  
+const MinimalConstructionPage = () => {
+  const [progress, setProgress] = useState(0);
+  const [loadingText, setLoadingText] = useState('EN COURS DE CHARGEMENT');
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCraneHeight(prev => prev >= 100 ? 0 : prev + 2);
-    }, 100);
-    return () => clearInterval(interval);
+    // Progress animation
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 85) {
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, 80);
+
+    // Text animation
+    const textInterval = setInterval(() => {
+      setLoadingText(prev => {
+        if (prev === 'EN COURS DE CHARGEMENT') return 'EN COURS DE CHARGEMENT.';
+        if (prev === 'EN COURS DE CHARGEMENT.') return 'EN COURS DE CHARGEMENT..';
+        if (prev === 'EN COURS DE CHARGEMENT..') return 'EN COURS DE CHARGEMENT...';
+        return 'EN COURS DE CHARGEMENT';
+      });
+    }, 800);
+
+    return () => {
+      clearInterval(progressInterval);
+      clearInterval(textInterval);
+    };
   }, []);
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto h-32 mb-12">
-      {/* Construction Site Base */}
-      <div className="absolute bottom-0 w-full h-4 rounded" style={{ background: '#052633' }}></div>
-      
-      {/* Crane Structure */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-        {/* Crane Tower */}
-        <div className="w-3 bg-yellow-600 relative" style={{ height: '80px' }}>
-          {/* Crane Arm */}
-          <div className="absolute top-2 -left-16 w-32 h-2 bg-yellow-600 crane-arm-animation"></div>
-          
-          {/* Crane Hook */}
-          <div 
-            className="absolute top-4 w-1 bg-gray-800 transition-all duration-1000"
-            style={{ left: '60px', height: `${craneHeight}px` }}
-          >
-            <div className="w-3 h-3 bg-yellow-600 rounded-full -ml-1 relative">
-              {/* Building Block */}
-              <div className="absolute top-3 -left-1 w-4 h-4 bg-orange-500 rounded animate-pulse"></div>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900">
+      {/* Blurred Background Effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating orbs for blur effect */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl animate-pulse" 
+             style={{ background: `radial-gradient(circle, #B86A5B 0%, transparent 70%)` }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-15 blur-3xl animate-pulse" 
+             style={{ background: `radial-gradient(circle, #052633 0%, transparent 70%)`, animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 rounded-full opacity-10 blur-3xl animate-pulse" 
+             style={{ background: `radial-gradient(circle, #D9D9D9 0%, transparent 70%)`, animationDelay: '4s' }}></div>
       </div>
-      
-      {/* Building being constructed */}
-      <div className="absolute bottom-4 right-1/4">
-        <div className="space-y-1">
-          <div className="w-16 h-4 bg-gray-400 animate-building-grow" style={{ animationDelay: '0s' }}></div>
-          <div className="w-16 h-4 bg-gray-500 animate-building-grow" style={{ animationDelay: '1s' }}></div>
-          <div className="w-16 h-4 bg-gray-400 animate-building-grow" style={{ animationDelay: '2s' }}></div>
-          <div className="w-16 h-4 bg-gray-500 animate-building-grow" style={{ animationDelay: '3s' }}></div>
-        </div>
-      </div>
-      
-      {/* Construction Workers (dots) */}
-      <div className="absolute bottom-4 left-1/4 space-x-2 flex">
-        <div className="w-2 h-6 bg-orange-400 rounded-full worker-animation" style={{ animationDelay: '0s' }}></div>
-        <div className="w-2 h-6 bg-blue-400 rounded-full worker-animation" style={{ animationDelay: '1s' }}></div>
-        <div className="w-2 h-6 bg-green-400 rounded-full worker-animation" style={{ animationDelay: '2s' }}></div>
-      </div>
-    </div>
-  );
-};
 
-const UnderConstructionPage = () => {
-  return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #D9D9D9 0%, #F5F5F5 100%)' }}>
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Floating Construction Icons */}
-        <div className="absolute top-20 left-10 hammer-animation opacity-20">
-          <Wrench size={40} style={{ color: '#B86A5B' }} />
-        </div>
-        <div className="absolute top-32 right-20 helmet-animation opacity-20">
-          <HardHat size={35} style={{ color: '#052633' }} />
-        </div>
-        <div className="absolute bottom-40 left-32 crane-animation opacity-15">
-          <Construction size={45} style={{ color: '#B86A5B' }} />
-        </div>
-        <div className="absolute top-60 right-40 float-animation opacity-25">
-          <Wrench size={30} style={{ color: '#052633' }} />
-        </div>
-        <div className="absolute bottom-60 right-10 helmet-animation opacity-20" style={{ animationDelay: '1s' }}>
-          <HardHat size={38} style={{ color: '#B86A5B' }} />
-        </div>
-      </div>
+      {/* Noise overlay for texture */}
+      <div className="absolute inset-0 opacity-20"
+           style={{ 
+             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+             mixBlendMode: 'multiply'
+           }}></div>
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
-        {/* Logo Section */}
-        <div className="mb-16 float-animation">
-          <div className="w-72 h-72 mx-auto mb-6">
-            <LirieLogo className="pulse-glow" />
+        
+        {/* Logo at top */}
+        <div className="absolute top-12 left-12">
+          <LirieLogoSmall className="w-16 h-16" />
+        </div>
+
+        {/* Main Content Container */}
+        <div className="text-center space-y-12 max-w-2xl mx-auto">
+          
+          {/* Main Title */}
+          <div className="space-y-6">
+            <h1 className="text-6xl md:text-8xl font-extralight tracking-wider text-white">
+              EN
+            </h1>
+            <h1 className="text-6xl md:text-8xl font-extralight tracking-wider" 
+                style={{ color: '#B86A5B' }}>
+              CONSTRUCTION
+            </h1>
+          </div>
+
+          {/* Subtitle */}
+          <p className="text-xl md:text-2xl font-light tracking-wide text-gray-300">
+            PRESQUE PRÊT
+          </p>
+
+          {/* Progress Section */}
+          <div className="space-y-6 w-full max-w-md mx-auto">
+            <div className="flex justify-between items-center text-sm font-light text-gray-400">
+              <span>{loadingText}</span>
+              <span>{progress}%</span>
+            </div>
+            
+            {/* Progress Bar */}
+            <div className="w-full">
+              <div className="w-full bg-gray-700/50 rounded-full h-1 backdrop-blur-sm">
+                <div 
+                  className="h-1 rounded-full transition-all duration-300 relative"
+                  style={{ 
+                    width: `${progress}%`,
+                    background: `linear-gradient(90deg, #B86A5B 0%, #D4846F 50%, #B86A5B 100%)`,
+                    boxShadow: `0 0 10px rgba(184, 106, 91, 0.5)`
+                  }}
+                >
+                  {/* Glowing dot at the end */}
+                  <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full" 
+                       style={{ 
+                         background: '#B86A5B',
+                         boxShadow: `0 0 8px rgba(184, 106, 91, 0.8)`
+                       }}></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Main Message */}
-        <div className="text-center mb-12 max-w-4xl">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6" style={{ color: '#052633' }}>
-            Notre site web est en
-            <span className="block mt-2 text-6xl md:text-8xl" style={{ color: '#B86A5B' }}>
-              construction
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-80" style={{ color: '#052633' }}>
-            Nous préparons quelque chose de solide pour vous !
-          </p>
+        {/* Contact Buttons at Bottom */}
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+          <div className="flex space-x-8">
+            {/* Email Button */}
+            <a 
+              href="mailto:g.collette@lirie.fr"
+              className="group relative w-16 h-16 rounded-full border border-gray-600 backdrop-blur-sm bg-gray-800/30 hover:bg-gray-700/50 transition-all duration-300 flex items-center justify-center hover:border-opacity-80"
+              style={{ borderColor: '#B86A5B' }}
+            >
+              <Mail className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors duration-300" />
+              <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="bg-gray-900/90 backdrop-blur-sm rounded-lg px-3 py-2 text-xs text-gray-300 whitespace-nowrap">
+                  g.collette@lirie.fr
+                </div>
+              </div>
+            </a>
+
+            {/* Phone Button */}
+            <a 
+              href="tel:+33663022922"
+              className="group relative w-16 h-16 rounded-full border border-gray-600 backdrop-blur-sm bg-gray-800/30 hover:bg-gray-700/50 transition-all duration-300 flex items-center justify-center hover:border-opacity-80"
+              style={{ borderColor: '#052633' }}
+            >
+              <Phone className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors duration-300" />
+              <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="bg-gray-900/90 backdrop-blur-sm rounded-lg px-3 py-2 text-xs text-gray-300 whitespace-nowrap">
+                  06.63.02.29.22
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
 
-        {/* Crane Animation replacing Progress Bar */}
-        <CraneAnimation />
-
-        {/* Contact Information */}
-        <Card className="w-full max-w-md mx-auto shadow-2xl border-0" style={{ background: 'rgba(255, 255, 255, 0.9)' }}>
-          <CardContent className="p-8">
-            <h3 className="text-2xl font-bold text-center mb-6" style={{ color: '#052633' }}>
-              Contactez-nous
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <div className="p-3 rounded-full" style={{ background: '#B86A5B' }}>
-                  <Mail className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm opacity-70" style={{ color: '#052633' }}>Email</p>
-                  <a 
-                    href="mailto:g.collette@lirie.fr" 
-                    className="text-base font-semibold hover:underline transition-colors duration-300"
-                    style={{ color: '#B86A5B' }}
-                  >
-                    g.collette@lirie.fr
-                  </a>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-4">
-                <div className="p-3 rounded-full" style={{ background: '#052633' }}>
-                  <Phone className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm opacity-70" style={{ color: '#052633' }}>Téléphone</p>
-                  <a 
-                    href="tel:+33663022922" 
-                    className="text-base font-semibold hover:underline transition-colors duration-300"
-                    style={{ color: '#052633' }}
-                  >
-                    06.63.02.29.22
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <div className="flex items-center justify-center space-x-3 text-sm" style={{ color: '#052633' }}>
-                <Clock className="w-4 h-4" style={{ color: '#B86A5B' }} />
-                <span>Lancement prévu bientôt</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Footer */}
-        <footer className="mt-16 text-center">
-          <p className="text-sm opacity-60" style={{ color: '#052633' }}>
-            © 2024 LIRIE - Ingénierie de la construction
+        {/* Copyright */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+          <p className="text-xs text-gray-500 font-light">
+            © 2024 par LIRIE. Créé avec passion.
           </p>
-        </footer>
+        </div>
       </div>
     </div>
   );
 };
 
-export default UnderConstructionPage;
+export default MinimalConstructionPage;

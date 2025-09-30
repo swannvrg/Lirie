@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
   margin: 0;
@@ -8,104 +8,88 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background: #D9D9D9;
-  color: #052633;
+  background: #1a1a1a;
+  color: #ffffff;
   overflow-x: hidden;
 }
 
 .App {
   min-height: 100vh;
-  background: linear-gradient(135deg, #D9D9D9 0%, #F5F5F5 100%);
 }
 
-/* Construction animations */
-@keyframes hammer-swing {
-  0%, 100% { transform: rotate(-15deg); }
-  50% { transform: rotate(25deg); }
+/* Custom animations for minimal design */
+@keyframes gentle-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
 }
 
-@keyframes crane-rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes helmet-bounce {
+@keyframes float-gentle {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-5px); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 10px rgba(184, 106, 91, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(184, 106, 91, 0.6), 0 0 30px rgba(184, 106, 91, 0.3);
+  }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(184, 106, 91, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(184, 106, 91, 0.7); }
+.animate-gentle-pulse {
+  animation: gentle-pulse 4s ease-in-out infinite;
 }
 
-@keyframes crane-arm-animation {
-  0%, 100% { transform: rotate(-2deg); }
-  50% { transform: rotate(2deg); }
+.animate-float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
 }
 
-@keyframes building-grow {
-  0% { width: 0; opacity: 0; }
-  100% { width: 4rem; opacity: 1; }
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
 }
 
-@keyframes worker-animation {
-  0%, 100% { transform: scale(1) translateY(0px); }
-  50% { transform: scale(1.1) translateY(-2px); }
+/* Blur effects */
+.blur-3xl {
+  filter: blur(64px);
 }
 
-.hammer-animation {
-  animation: hammer-swing 2s ease-in-out infinite;
-  transform-origin: bottom center;
+/* Backdrop blur support */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
-.crane-animation {
-  animation: crane-rotate 20s linear infinite;
-}
-
-.helmet-animation {
-  animation: helmet-bounce 3s ease-in-out infinite;
-}
-
-.float-animation {
-  animation: float 4s ease-in-out infinite;
-}
-
-.pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
-}
-
-.crane-arm-animation {
-  animation: crane-arm-animation 4s ease-in-out infinite;
-}
-
-.animate-building-grow {
-  animation: building-grow 2s ease-out forwards;
-}
-
-.worker-animation {
-  animation: worker-animation 2s ease-in-out infinite;
-}
-
-/* Custom scrollbar */
+/* Custom scrollbar for dark theme */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #D9D9D9;
+  background: rgba(31, 41, 55, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #B86A5B;
-  border-radius: 4px;
+  background: rgba(184, 106, 91, 0.6);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A55A4B;
+  background: rgba(184, 106, 91, 0.8);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Text selection */
+::selection {
+  background: rgba(184, 106, 91, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(184, 106, 91, 0.3);
+  color: white;
 }
