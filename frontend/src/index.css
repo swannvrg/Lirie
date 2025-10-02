@@ -84,3 +84,55 @@ code {
     @apply bg-background text-foreground;
     }
 }
+
+
+
+  @keyframes float1 {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(50px, -30px); }
+    50%  { transform: translate(0, -60px); }
+    75%  { transform: translate(-40px, 30px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes float2 {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-40px, 40px); }
+    50%  { transform: translate(60px, 0); }
+    75%  { transform: translate(-20px, -40px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes float3 {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(30px, 60px); }
+    50%  { transform: translate(-50px, 30px); }
+    75%  { transform: translate(20px, -30px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes float4 {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-30px, -50px); }
+    50%  { transform: translate(40px, -20px); }
+    75%  { transform: translate(20px, 40px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes float5 {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(40px, 20px); }
+    50%  { transform: translate(-30px, -40px); }
+    75%  { transform: translate(10px, 50px); }
+    100% { transform: translate(0, 0); }
+  }
+
+  .orb {
+    position: absolute;
+    animation-duration: 25s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  .orb1 { top: 20%; left: 25%; animation-name: float1; }
+  .orb2 { bottom: 25%; right: 20%; animation-name: float2; }
+  .orb3 { top: 50%; left: 50%; animation-name: float3; }
+  .orb4 { top: 10%; right: 30%; animation-name: float4; }
+  .orb5 { bottom: 15%; left: 15%; animation-name: float5; }
+
+
