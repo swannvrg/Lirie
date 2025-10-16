@@ -135,4 +135,23 @@ code {
   .orb4 { top: 10%; right: 30%; animation-name: float4; }
   .orb5 { bottom: 15%; left: 15%; animation-name: float5; }
 
+@font-face {
+  font-family: 'Black Mango';
+  src: url('./police/Black_Mango/black-mango-regular.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'Gilroy';
+  src: url('./police/gilroy/Gilroy-Medium.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Galient';
+  src: url('./police/galient/GallientRegular-eZoMp.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}

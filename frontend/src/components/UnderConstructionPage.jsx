@@ -124,23 +124,22 @@ const MinimalConstructionPage = () => {
           
           {/* Main Title */}
           <div className="space-y-6 text-center">
-            <h1 className="text-4xl xs:text5xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight tracking-wider text-white text-bold">
+            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight tracking-wider text-white text-bold" style={{ fontFamily: 'Black Mango' }}>
               EN 
             </h1>
-           <h1
-            className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight  text-center text-bold"
-            style={{ color: '#B86A5B' }}
-          >
-            CONSTRUCTION
-          </h1>
+            <h1
+              className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight text-center text-bold"
+              style={{ color: '#B86A5B', fontFamily: 'Black Mango' }}
+            >
+              CONSTRUCTION
+            </h1>
           </div>
 
-
-
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl font-light tracking-wide text-gray-300">
+          <p className="text-xl md:text-2xl font-light tracking-wide text-gray-300" style={{ fontFamily: 'Gilroy' }}>
             Nous construisons un site solide pour vous !
           </p>
+
 
           {/* Progress Section */}
           <div className="space-y-6 w-full max-w-md mx-auto">
