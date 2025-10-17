@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0ebb48cc.css",
+    "main.js": "/static/js/main.e70b116f.js",
+    "static/media/Gilroy-Medium.ttf": "/static/media/Gilroy-Medium.1b4da6582f83f45ea039.ttf",
+    "static/media/GallientRegular-eZoMp.ttf": "/static/media/GallientRegular-eZoMp.419a762c1efbc6a5bd7c.ttf",
+    "static/media/black-mango-regular.ttf": "/static/media/black-mango-regular.93e0b8cb943e082319e4.ttf",
+    "index.html": "/index.html",
+    "main.0ebb48cc.css.map": "/static/css/main.0ebb48cc.css.map",
+    "main.e70b116f.js.map": "/static/js/main.e70b116f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0ebb48cc.css",
+    "static/js/main.e70b116f.js"
+  ]
+}
