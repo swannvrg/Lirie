@@ -60,8 +60,12 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "predeploy": "npm run build && echo > dist/.nojekyll",
+    "deploy": "gh-pages -d dist"
   },
+
+
   "browserslist": {
     "production": [
       ">0.2%",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone } from 'lucide-react';
 
+
 // SVG Logo Component - Smaller version for header
 const LirieLogoSmall = ({ className }) => (
   <div className={`${className} relative`}>
