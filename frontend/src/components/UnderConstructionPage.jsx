@@ -130,7 +130,7 @@ const MinimalConstructionPage = () => {
             </h1>
             <h1
               className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight text-center text-bold"
-              style={{ color: '#B86A5B', fontFamily: 'Black Mango' }}
+              style={{ color: '#B86A5B', fontFamily:'Black Mango' }}
             >
               CONSTRUCTION
             </h1>
