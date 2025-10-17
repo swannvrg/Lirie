@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+import { defineConfig } from 'vite'
 export default defineConfig({
-  plugins: [react()],
-  base: '/swannvrg.github.io/', // remplacez <repo> par le nom exact du dépôt
-  build: { outDir: 'docs' }
+  base: '/',   // domaine racine → pas de sous-chemin
 })
