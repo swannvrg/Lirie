@@ -61,6 +61,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+      "postbuild": "copy build\\index.html build\\404.html", 
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
